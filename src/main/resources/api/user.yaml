@@ -1,0 +1,151 @@
+openapi: 3.0.3
+info: 
+  title: "utenti"
+  version: "1.0.0"
+servers:
+  - url: "http://localhost:8080/api/v1"
+paths:
+  /utenti:
+    post:
+      operationId: "creaUtente"
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+                type: "object"
+                required:
+                  - nome
+                properties:
+                  nome:
+                    type: "string"
+                  cognome:
+                    type: "string"
+                  email:
+                    type: "string"
+                  cellulare:
+                    type: "string"
+                  eta:
+                    type: "integer"
+      responses:
+        '201': 
+          description: "success"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Utente"
+        '400':
+          description: "bad request"
+          content: 
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Utente"
+        '500':
+          description: "" 
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Utente"     
+    get:
+      operationId: "getUtenti"
+      parameters: 
+        - in: query
+          name: offset
+          schema:
+            type: "integer"
+        - in: query    
+          name: limmit
+          schema:
+            type: "integer"
+        - in: query
+          name: cognome
+          schema:
+            type: "string"
+        - in: query
+          name: email
+          schema:
+            type: "string"
+      responses:
+        '200':
+          description: 'ok'
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Utenti"
+  /utenti/{id}:
+    get:
+      operationId: "get utente by id"
+      parameters:
+        - in: path 
+          name: id
+          schema:
+            type: "string"
+          required: true  
+      responses:
+        '200':
+          description: "ok"
+          content: 
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Utente"  
+        '404':
+          description: "not found"  
+          content:
+            application/json: 
+              schema: 
+                $ref: "#/components/schemas/Errore"
+    delete:
+      operationId: "deleteUtente"
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: "string"
+          required: true
+      responses:
+        '200':
+          description: "deleted"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Utente"
+
+components:
+  schemas:
+    Utente:
+      type: "object"
+      properties: 
+        id:
+          type: "string"
+        nome:
+          type: "string"
+        cognome:
+          type: "string"
+        email:
+          type: "string"
+        cellulare:
+          type: "string"
+        eta:
+          type: "integer"
+    Errore:
+      type: "object"
+      properties:
+        errorCode: 
+          type: "string"
+    Utenti:
+      type: "object"
+      properties:
+        utenti: 
+          type: "array"
+          items: 
+            $ref: "#/components/schemas/Utente"
+        pageNumber:
+          type: "integer"   
+  securitySchemes:
+      bearerAuth: # arbitrary name for the security scheme
+        type: http
+        scheme: bearer
+        bearerFormat: JWT # optional, arbitrary value for documentation purposes
+
+
+  
