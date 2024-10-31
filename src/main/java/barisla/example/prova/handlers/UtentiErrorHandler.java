@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 @ControllerAdvice
 public class UtentiErrorHandler {
@@ -26,5 +27,12 @@ public class UtentiErrorHandler {
         errore.setErrorCode("Utente con email "+ utenteEsisteGia.getEmail() +"esiste gia.");
         return  new ResponseEntity<>(errore, HttpStatusCode.valueOf(409));
 
+    }
+
+    @ExceptionHandler({NoResourceFoundException.class})
+    public ResponseEntity<Object> handleNoResourceFoundException (NoResourceFoundException noResourceFoundException) {
+        Errore errore = new Errore();
+        errore.setErrorCode("Risorsa non trovata");
+        return  new ResponseEntity<>(errore, HttpStatusCode.valueOf(404));
     }
 }

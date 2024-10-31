@@ -27,6 +27,10 @@ public class UtentiController implements UtentiApi {
     @Autowired
     UtenteMapper utenteMapper;
 
+
+    public UtentiController() {
+      System.out.println("UtentiController started");
+    }
     @SneakyThrows
     @Override
     public ResponseEntity<Utente> creaUtente(CreaUtenteRequest creaUtenteRequest) {
@@ -34,7 +38,7 @@ public class UtentiController implements UtentiApi {
         barisla.example.prova.services.models.Utente utenteService = userService.creaUtente(utenteMapper.transform(creaUtenteRequest));
         Utente utente = utenteMapper.transform(utenteService);
 
-        return new ResponseEntity<>(utente, HttpStatusCode.valueOf(200));
+        return new ResponseEntity<>(utente, HttpStatusCode.valueOf(201));
     }
 
     @SneakyThrows
