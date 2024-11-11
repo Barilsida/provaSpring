@@ -7,12 +7,9 @@ import barisla.example.prova.integrations.model.UtenteDAO;
 import barisla.example.prova.integrations.model.UtentiRepository;
 import barisla.example.prova.services.models.CreaUtente;
 import barisla.example.prova.services.models.Utente;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -65,21 +62,6 @@ class UserServiceTest {
         assertEquals(utenteEsisteGiaResponse.getEmail(),richiestaNuovoUtente.getEmail());
     }
 
-    @Test
-    void getUtenteById() {
-    }
-
-    @Test
-    void getUtentiByCognome() {
-    }
-
-    @Test
-    void getUtenteByEmail() {
-    }
-
-    @Test
-    void getAll() {
-    }
 
     @Test
     void deleteUtenteByID() {

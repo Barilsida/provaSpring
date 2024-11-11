@@ -2,8 +2,6 @@ package barisla.example.prova.controllers;
 
 import barisla.example.presentation.model.CreaUtenteRequest;
 import barisla.example.prova.expetions.UtenteEsisteGia;
-import barisla.example.prova.mappers.UtenteMapper;
-import barisla.example.prova.mappers.UtenteMapperImpl;
 import barisla.example.prova.services.UserService;
 import barisla.example.prova.services.models.CreaUtente;
 import barisla.example.prova.services.models.Utente;
@@ -14,7 +12,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentMatchers;
-import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -24,17 +21,13 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.MediaType;
 
 
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -64,16 +57,12 @@ class UtentiControllerTest {
 
     @Test
     void creaUtenteSuccesso() {
-
-
-
         CreaUtente richiestaNuovoUtenteService = CreaUtente.builder().
                 nome("Paolo").
                 cognome("verdi").
                 email("mrossi@gmail.com").
                 cellulare("12312345").
                 eta(23).build();
-
 
         CreaUtenteRequest richiestaNuovoUtenteController= new CreaUtenteRequest();
         richiestaNuovoUtenteController.setNome(richiestaNuovoUtenteService.getNome());
@@ -89,7 +78,6 @@ class UtentiControllerTest {
         utenteCreato.setCellulare(richiestaNuovoUtenteService.getCellulare());
         utenteCreato.setEmail(richiestaNuovoUtenteService.getEmail());
         utenteCreato.setEta(richiestaNuovoUtenteService.getEta());
-
 
         try {
 
@@ -134,8 +122,7 @@ class UtentiControllerTest {
                             ).value(
                                     23
                             )
-                    );;
-
+                    );
 
         } catch (UtenteEsisteGia u) {
             assertEquals(true, true);
@@ -145,6 +132,65 @@ class UtentiControllerTest {
             throw new RuntimeException(e);
         }
 
+    }
+
+    @Test
+    void deleteUtenteSuccesso() {
+        String idTest = "1231234";
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        Utente utenteCancellato = new Utente();
+        utenteCancellato.setId(idTest);
+        utenteCancellato.setNome("Mario");
+        utenteCancellato.setCognome("Rossi");
+        utenteCancellato.setCellulare("12312345");
+        utenteCancellato.setEmail("mrossi@gmail.com");
+        utenteCancellato.setEta(23);
+
+
+        try {
+            when(userService.deleteUtenteByID(ArgumentMatchers.any())).thenReturn(utenteCancellato);
+
+            String bodyAsString = objectMapper.writeValueAsString(utenteCancellato);
+
+            mockMvc.perform(delete("/api/v1/utenti/{id}", idTest)
+                            .contentType(MediaType.APPLICATION_JSON)
+                            .content(bodyAsString))
+                    .andExpect(status().isOk())
+                    .andExpect(jsonPath(
+                            "$.id"
+                    ).value(
+                            idTest
+                    ))
+                    .andExpect(jsonPath(
+                            "$.nome"
+                    ).value(
+                            "Mario"
+                    ))
+                    .andExpect(jsonPath(
+                            "$.cognome"
+                    ).value(
+                            "Rossi"
+                    ))
+                    .andExpect(jsonPath(
+                            "$.email"
+                    ).value(
+                            "mrossi@gmail.com"
+                    ))
+                    .andExpect(jsonPath(
+                            "$.cellulare"
+                    ).value(
+                            "12312345"
+                    ))
+                    .andExpect(jsonPath(
+                                    "$.eta"
+                            ).value(
+                                    23
+                            )
+                    );
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }

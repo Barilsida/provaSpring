@@ -23,7 +23,4 @@ public class UtenteDAO {
     String cellulare;
     int eta;
 
-
-
-
 }
