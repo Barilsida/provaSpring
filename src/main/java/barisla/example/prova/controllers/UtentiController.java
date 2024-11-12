@@ -1,7 +1,7 @@
 package barisla.example.prova.controllers;
 
 import barisla.example.presentation.api.UtentiApi;
-import barisla.example.prova.integrations.model.UtentiRepository;
+import barisla.example.prova.integrations.model.UtentiDAO;
 import barisla.example.prova.mappers.UtenteMapper;
 import barisla.example.prova.services.UserService;
 import lombok.SneakyThrows;

@@ -3,7 +3,8 @@ package barisla.example.prova.services;
 import barisla.example.prova.ProvaApplication;
 import barisla.example.prova.expetions.UtenteEsisteGia;
 import barisla.example.prova.expetions.UtenteNonTrovato;
-import barisla.example.prova.integrations.model.UtentiRepository;
+import barisla.example.prova.integrations.model.UtenteEntity;
+import barisla.example.prova.integrations.model.UtentiDAO;
 import barisla.example.prova.services.models.CreaUtente;
 import barisla.example.prova.services.models.Utente;
 import org.junit.jupiter.api.Test;
@@ -18,7 +19,7 @@ class UserServiceTest {
     UserService userService;
 
     @Autowired
-    UtentiRepository utentiRepository;
+    UtentiDAO utentiRepository;
 
     @Test
     void creaUtente() {
@@ -73,9 +74,9 @@ class UserServiceTest {
         }
     }
 
-    private UtenteDAO creaUtentePerTest () {
+    private UtenteEntity creaUtentePerTest () {
         utentiRepository.deleteAll();
-        UtenteDAO utenteTest =  new UtenteDAO();
+        UtenteEntity utenteTest =  new UtenteEntity();
         utenteTest.setNome("Mario");
         utenteTest.setCognome("Rossi");
         utenteTest.setEmail("mrossi@gmail.com");

@@ -3,7 +3,8 @@ package barisla.example.prova.services;
 
 import barisla.example.prova.expetions.UtenteEsisteGia;
 import barisla.example.prova.expetions.UtenteNonTrovato;
-import barisla.example.prova.integrations.model.UtentiRepository;
+import barisla.example.prova.integrations.model.UtenteEntity;
+import barisla.example.prova.integrations.model.UtentiDAO;
 import barisla.example.prova.mappers.UtenteMapper;
 import barisla.example.prova.services.models.CreaUtente;
 import barisla.example.prova.services.models.Utente;
@@ -15,7 +16,7 @@ import java.util.*;
 @Service
 public class UserService {
     @Autowired
-    UtentiRepository utentiRepository;
+    UtentiDAO utentiRepository;
 
     @Autowired
     UtenteMapper utenteMapper;
@@ -27,14 +28,14 @@ public class UserService {
             throw new UtenteEsisteGia(utente.getEmail());
         }
 
-        UtenteDAO utenteDAO = utenteMapper.transform(utente);
+        UtenteEntity utenteDAO = utenteMapper.transform(utente);
         utentiRepository.save(utenteDAO);
 
         return utenteMapper.transform(utenteDAO);
     }
 
     public Utente getUtenteById(String id) throws UtenteNonTrovato {
-       Optional<UtenteDAO> utenti = utentiRepository.findById(UUID.fromString(id));
+       Optional<UtenteEntity> utenti = utentiRepository.findById(UUID.fromString(id));
         if (!utenti.isPresent()){
             throw new UtenteNonTrovato(id);
         }
@@ -56,7 +57,7 @@ public class UserService {
     }
 
     public Utente deleteUtenteByID (String id) throws UtenteNonTrovato {
-        Optional<UtenteDAO> utenteDAOOptional = utentiRepository.findById(UUID.fromString(id));
+        Optional<UtenteEntity> utenteDAOOptional = utentiRepository.findById(UUID.fromString(id));
 
         if(!utentiRepository.findById(UUID.fromString(id)).isPresent()){
             throw new UtenteNonTrovato(id);

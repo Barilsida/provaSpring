@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @DataJpaTest
 class UtentiRepositoryTest {
     @Autowired
-    UtentiRepository utentiRepository;
+    UtentiDAO utentiRepository;
 
     @BeforeEach
      void setUp() {
