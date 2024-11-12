@@ -29,8 +29,7 @@
     <properties>
         <java.version>17</java.version>
         <post.integration.test.phase>post-integration-test</post.integration.test.phase>
-        <oracle-xe-timeout>120000</oracle-xe-timeout>
-        <activemq-timeout>120000</activemq-timeout>
+        <oracle-xe-timeout>200000</oracle-xe-timeout>
         <docker.image.oracle.name>registry.popso.it/cloudbees/oracle-xe:18c</docker.image.oracle.name>
     </properties>
     <dependencies>
@@ -239,7 +238,7 @@
                         </log>
                         <wait>
                             <time>${oracle-xe-timeout}</time>
-                            <log>DATABASE 18c IS READY TO USE!</log>
+                            <log>DATABASE IS READY TO USE!</log>
                         </wait>
                     </run>
                 </image>
