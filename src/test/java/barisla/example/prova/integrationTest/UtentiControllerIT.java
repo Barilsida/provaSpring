@@ -3,7 +3,6 @@ package barisla.example.prova.integrationTest;
 import barisla.example.presentation.model.CreaUtenteRequest;
 import barisla.example.prova.ProvaApplication;
 import barisla.example.prova.services.models.CreaUtente;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,14 +18,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest(classes = {ProvaApplication.class})
 @AutoConfigureMockMvc
-@TestPropertySource(properties = {"spring.datasource.url=jdbc:oracle:thin:@//localhost:1521/XE",
-        "spring.datasource.username=DUMMY",
-        "spring.datasource.password=dummy_psw",
-        "spring.jpa.hibernate.ddl-auto=update",
-        "spring.datasource.driverClassName=oracle.jdbc.OracleDriver",
-        "spring.datasource.testWhileIdle=true",
-        "spring.datasource.validationQuery=SELECT 1",})
-public class UtentiControlloerIT {
+@TestPropertySource(locations = "classpath:IT/applications.properties")
+public class UtentiControllerIT {
     @Autowired
     private MockMvc mockMvc;
 

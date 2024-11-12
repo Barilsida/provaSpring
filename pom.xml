@@ -30,7 +30,7 @@
         <java.version>17</java.version>
         <post.integration.test.phase>post-integration-test</post.integration.test.phase>
         <oracle-xe-timeout>200000</oracle-xe-timeout>
-        <docker.image.oracle.name>registry.popso.it/cloudbees/oracle-xe:18c</docker.image.oracle.name>
+        <docker.image.oracle.name>gvenzl/oracle-xe</docker.image.oracle.name>
     </properties>
     <dependencies>
         <dependency>
@@ -106,6 +106,12 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.oracle.database.jdbc</groupId>
+            <artifactId>ojdbc8</artifactId>
+            <scope>runtime</scope>
         </dependency>
 
     </dependencies>
@@ -217,7 +223,7 @@
                     <name>${docker.image.oracle.name}</name>
                     <run>
                         <env>
-                            <ORACLE_RANDOM_PASSWORD>yes</ORACLE_RANDOM_PASSWORD>
+                            <ORACLE_PASSWORD>12345</ORACLE_PASSWORD>
                         </env>
                         <ports>
                             <port>1521:1521</port>

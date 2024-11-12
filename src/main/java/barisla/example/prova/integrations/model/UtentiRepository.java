@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.UUID;
 
 
-public interface UtentiRepository extends JpaRepository<UtenteDAO, UUID> {
+public interface UtenteDAO extends JpaRepository<UtenteDAO, UUID> {
 
     public List<UtenteDAO> findByCognomeIgnoreCase(String cognome);
 

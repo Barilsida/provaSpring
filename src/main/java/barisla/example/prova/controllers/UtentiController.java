@@ -16,7 +16,6 @@ import barisla.example.presentation.model.Utente;
 import barisla.example.presentation.model.Utenti;
 
 import java.util.List;
-import java.util.UUID;
 
 
 @RestController

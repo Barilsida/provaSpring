@@ -3,7 +3,6 @@ package barisla.example.prova.services;
 
 import barisla.example.prova.expetions.UtenteEsisteGia;
 import barisla.example.prova.expetions.UtenteNonTrovato;
-import barisla.example.prova.integrations.model.UtenteDAO;
 import barisla.example.prova.integrations.model.UtentiRepository;
 import barisla.example.prova.mappers.UtenteMapper;
 import barisla.example.prova.services.models.CreaUtente;
