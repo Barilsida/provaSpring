@@ -1,7 +1,7 @@
 package barisla.example.prova.mappers;
 
 import barisla.example.prova.ProvaApplication;
-import barisla.example.prova.integrations.model.UtenteDAO;
+import barisla.example.prova.integrations.model.UtenteEntity;
 import barisla.example.prova.services.models.CreaUtente;
 import barisla.example.prova.services.models.Utente;
 import org.junit.jupiter.api.Test;
@@ -21,19 +21,19 @@ class UtenteMapperTest {
     @Test
     void transformUUIDtoIdString() {
         UUID uuid = new UUID(123123, 123123);
-        UtenteDAO utenteDAO = new UtenteDAO();
-        utenteDAO.setId(uuid);
-        Utente utente = utenteMapper.transform(utenteDAO);
+        UtenteEntity utenteEntity = new UtenteEntity();
+        utenteEntity.setId(uuid);
+        Utente utente = utenteMapper.transform(utenteEntity);
 
-        assertEquals(utente.getId(), utenteDAO.getId().toString());
+        assertEquals(utente.getId(), utenteEntity.getId().toString());
     }
 
     @Test
     void transformIgnoreId() {
         CreaUtente creaUtente = new CreaUtente("Mario","Rossi","1231234","mrossi@gmail.com",43);
-        UtenteDAO utenteDAO = utenteMapper.transform(creaUtente);
+        UtenteEntity utenteEntity = utenteMapper.transform(creaUtente);
 
-        assertNull(utenteDAO.getId());
+        assertNull(utenteEntity.getId());
     }
 
     @Test

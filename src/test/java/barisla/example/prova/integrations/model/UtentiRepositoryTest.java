@@ -17,13 +17,13 @@ class UtentiRepositoryTest {
 
     @BeforeEach
      void setUp() {
-        UtenteDAO utenteDAO = new UtenteDAO();
-        utenteDAO.setCellulare("1111111");
-        utenteDAO.setNome("Giacomo");
-        utenteDAO.setCognome("Bianchi");
-        utenteDAO.setEmail("gbianchi@gmail.com");
-        utenteDAO.setEta(30);
-        utentiRepository.save(utenteDAO);
+        UtenteEntity utenteEntity = new UtenteEntity();
+        utenteEntity.setCellulare("1111111");
+        utenteEntity.setNome("Giacomo");
+        utenteEntity.setCognome("Bianchi");
+        utenteEntity.setEmail("gbianchi@gmail.com");
+        utenteEntity.setEta(30);
+        utentiRepository.save(utenteEntity);
     }
 
     @AfterEach
@@ -33,7 +33,7 @@ class UtentiRepositoryTest {
 
     @Test
     void cercaPerEmailSuccesso() {
-        List<UtenteDAO> utenti = utentiRepository.cercaPerEmail("gbianchi@gmail.com");
+        List<UtenteEntity> utenti = utentiRepository.cercaPerEmail("gbianchi@gmail.com");
 
         assertEquals(1, utenti.size());
         assertEquals("gbianchi@gmail.com", utenti.get(0).getEmail());
@@ -41,7 +41,7 @@ class UtentiRepositoryTest {
 
     @Test
     void cercaPerEmailFailure() {
-        List<UtenteDAO> utenti = utentiRepository.cercaPerEmail("grossi@gmail.com");
+        List<UtenteEntity> utenti = utentiRepository.cercaPerEmail("grossi@gmail.com");
 
         assertEquals(0, utenti.size());
     }

@@ -2,8 +2,7 @@ package barisla.example.prova.mappers;
 
 import barisla.example.presentation.model.CreaUtenteRequest;
 import barisla.example.presentation.model.Utente;
-import barisla.example.presentation.model.Utenti;
-import barisla.example.prova.integrations.model.UtenteDAO;
+import barisla.example.prova.integrations.model.UtenteEntity;
 import barisla.example.prova.services.models.CreaUtente;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -20,7 +19,7 @@ public interface UtenteMapper {
     public Utente transform (barisla.example.prova.services.models.Utente utente);
 
     @Mapping(target = "id", source = "id", qualifiedByName = "uuidToString")
-    public barisla.example.prova.services.models.Utente transform (UtenteDAO utenti);
+    public barisla.example.prova.services.models.Utente transform (UtenteEntity utenti);
 
     @Named("uuidToString")
     default String uuidToString(UUID id){
@@ -28,9 +27,9 @@ public interface UtenteMapper {
     }
 
     @Mapping(target = "id", ignore = true)
-    public UtenteDAO transform (CreaUtente nuovoUtente);
+    public UtenteEntity transform (CreaUtente nuovoUtente);
 
-    public List<barisla.example.prova.services.models.Utente> transformListUtenteDAO (List<UtenteDAO> utenti);
+    public List<barisla.example.prova.services.models.Utente> transformListUtenteDAO (List<UtenteEntity> utenti);
 
     public List<barisla.example.presentation.model.Utente> transformListUtenteService (List<barisla.example.prova.services.models.Utente> utenti);
 
