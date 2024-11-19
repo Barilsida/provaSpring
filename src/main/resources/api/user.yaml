@@ -109,6 +109,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Utente"
+        '404':
+          description: "utente not found"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Errore"
 
 components:
   schemas:
