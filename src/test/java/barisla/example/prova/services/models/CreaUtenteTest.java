@@ -8,9 +8,8 @@ class CreaUtenteTest {
     String nomeTest = "nomeTest";
     String cognomeTest = "cognomeTest";
     String emailTest = "emailTest";
-    String cellulareTest = "cellulareTest";
     int etaTest = 23;
-    CreaUtente utente = new CreaUtente(nomeTest, cognomeTest, cellulareTest, emailTest, etaTest);
+    CreaUtente utente = new CreaUtente(nomeTest, cognomeTest, emailTest, etaTest);
 
     @Test
     void getNome() {
@@ -24,13 +23,6 @@ class CreaUtenteTest {
         utente.setCognome(cognomeTest);
 
         assertEquals(utente.getCognome(),cognomeTest);
-    }
-
-    @Test
-    void getCellulare() {
-        utente.setCellulare(cellulareTest);
-
-        assertEquals(utente.getCellulare(),cellulareTest);
     }
 
     @Test
@@ -59,13 +51,6 @@ class CreaUtenteTest {
         utente.setCognome(cognomeTest);
 
         assertEquals(utente.getCognome(),cognomeTest);
-    }
-
-    @Test
-    void setCellulare() {
-        utente.setCellulare(cellulareTest);
-
-        assertEquals(utente.getCellulare(),cellulareTest);
     }
 
     @Test

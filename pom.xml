@@ -27,7 +27,7 @@
         <url/>
     </scm>
     <properties>
-        <java.version>17</java.version>
+        <java.version>21</java.version>
         <post.integration.test.phase>post-integration-test</post.integration.test.phase>
         <oracle-xe-timeout>200000</oracle-xe-timeout>
         <docker.image.oracle.name>gvenzl/oracle-xe</docker.image.oracle.name>
@@ -91,11 +91,6 @@
             <version>2.1.214</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <version>2.1.214</version>
-        </dependency>
 
         <dependency>
             <groupId>org.mockito</groupId>
@@ -125,7 +120,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.9.0</version>
+
                 <configuration>
                     <annotationProcessorPaths>
                         <path>
@@ -144,6 +139,7 @@
                             <version>1.18.34</version>
                         </path>
                     </annotationProcessorPaths>
+
                 </configuration>
             </plugin>
 

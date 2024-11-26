@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
+
 @Getter 
 @Setter
 @AllArgsConstructor
@@ -13,7 +15,7 @@ public class Utente {
     private String id;
     private String nome;
     private String cognome;
-    private String cellulare;
     private String email;
     private Integer eta;
+    private ArrayList<ContattoUtente> contattiUtente;
 }

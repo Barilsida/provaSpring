@@ -38,13 +38,6 @@ class UtenteEntityTest {
     }
 
     @Test
-    void getCellulare() {
-        utenteEntity.setCellulare("12312345");
-
-        assertEquals(utenteEntity.getCellulare(),"12312345");
-    }
-
-    @Test
     void getEta() {
         utenteEntity.setEta(23);
 
@@ -80,12 +73,6 @@ class UtenteEntityTest {
         assertEquals(utenteEntity.getEmail(),"mrossi@gmail.com");
     }
 
-    @Test
-    void setCellulare() {
-        utenteEntity.setCellulare("12312345");
-
-        assertEquals(utenteEntity.getCellulare(),"12312345");
-    }
 
     @Test
     void setEta() {

@@ -3,13 +3,18 @@ package barisla.example.prova.services;
 
 import barisla.example.prova.expetions.UtenteEsisteGia;
 import barisla.example.prova.expetions.UtenteNonTrovato;
+import barisla.example.prova.integrations.model.UserContactDAO;
+import barisla.example.prova.integrations.model.UserContactEntity;
 import barisla.example.prova.integrations.model.UtenteEntity;
 import barisla.example.prova.integrations.model.UtentiDAO;
 import barisla.example.prova.mappers.UtenteMapper;
+import barisla.example.prova.services.models.ContattoUtente;
+import barisla.example.prova.services.models.CreaContattoUtente;
 import barisla.example.prova.services.models.CreaUtente;
 import barisla.example.prova.services.models.Utente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
@@ -20,6 +25,9 @@ public class UserService {
 
     @Autowired
     UtenteMapper utenteMapper;
+
+    @Autowired
+    UserContactDAO userContactDAO;
 
     private HashMap<String, Utente> utenti = new HashMap<>();
 
@@ -48,6 +56,7 @@ public class UserService {
 
         return utenteMapper.transformListUtenteDAO(utentiRepository.findByCognomeIgnoreCase(cognome));
     }
+
     public  List<Utente> getUtenteByEmail (String email) {
         return utenteMapper.transformListUtenteDAO(utentiRepository.cercaPerEmail(email));
     }
@@ -66,5 +75,26 @@ public class UserService {
         utentiRepository.deleteById(UUID.fromString(id));
 
         return utenteMapper.transform(utenteDAOOptional.get());
+    }
+
+    @Transactional
+    public ContattoUtente creaContattiUtente (String userId, CreaContattoUtente nuovoContatto) throws UtenteNonTrovato {
+        Optional<UtenteEntity> utenteEntity = utentiRepository.findById(UUID.fromString(userId));
+
+        if(!utenteEntity.isPresent()) {
+            throw new UtenteNonTrovato(userId);
+        }
+
+        UserContactEntity userContactEntity = new UserContactEntity();
+        userContactEntity.setTipo(nuovoContatto.getTipo());
+        userContactEntity.setValue(nuovoContatto.getValue());
+
+        userContactDAO.save(userContactEntity);
+
+        utenteEntity.get().getContactEntity().add(userContactEntity);
+        utentiRepository.save(utenteEntity.get());
+
+
+        return utenteMapper.transformContatto(userContactEntity);
     }
 }

@@ -3,6 +3,7 @@ package barisla.example.prova.integrations.model;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.UUID;
 
 
@@ -17,7 +18,8 @@ public class UtenteEntity {
     String nome;
     String cognome;
     String email;
-    String cellulare;
     int eta;
+    @OneToMany
+    ArrayList<UserContactEntity> contactEntity;
 
 }

@@ -3,6 +3,7 @@ package barisla.example.prova.services;
 import barisla.example.prova.ProvaApplication;
 import barisla.example.prova.expetions.UtenteEsisteGia;
 import barisla.example.prova.expetions.UtenteNonTrovato;
+import barisla.example.prova.integrations.model.UserContactEntity;
 import barisla.example.prova.integrations.model.UtenteEntity;
 import barisla.example.prova.integrations.model.UtentiDAO;
 import barisla.example.prova.services.models.CreaUtente;
@@ -10,6 +11,11 @@ import barisla.example.prova.services.models.Utente;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -26,7 +32,6 @@ class UserServiceTest {
         CreaUtente richiestaNuovoUtente = CreaUtente.builder().
                 nome("Paolo").
                 cognome("verdi").
-                cellulare("12312345").
                 eta(23).build();
 
         Utente nuovoutenteResponse = null;
@@ -39,7 +44,6 @@ class UserServiceTest {
         assertEquals(nuovoutenteResponse.getNome(), richiestaNuovoUtente.getNome());
         assertEquals(nuovoutenteResponse.getCognome(), richiestaNuovoUtente.getCognome());
         assertEquals(nuovoutenteResponse.getEmail(), richiestaNuovoUtente.getEmail());
-        assertEquals(nuovoutenteResponse.getCellulare(),richiestaNuovoUtente.getCellulare());
         assertEquals(nuovoutenteResponse.getEta(), richiestaNuovoUtente.getEta());
 
         assertNotNull(nuovoutenteResponse.getId());
@@ -51,8 +55,8 @@ class UserServiceTest {
                 nome("Paolo").
                 cognome("verdi").
                 email("mrossi@gmail.com").
-                cellulare("12312345").
-                eta(23).build();
+                eta(23)
+                .build();
         creaUtentePerTest();
 
         UtenteEsisteGia utenteEsisteGiaResponse = assertThrows(UtenteEsisteGia.class,
@@ -80,8 +84,13 @@ class UserServiceTest {
         utenteTest.setNome("Mario");
         utenteTest.setCognome("Rossi");
         utenteTest.setEmail("mrossi@gmail.com");
-        utenteTest.setCellulare("12121212");
         utenteTest.setEta(34);
+
+        UserContactEntity userContactEntity = new UserContactEntity();
+
+        userContactEntity.setValue("1212121212");
+        userContactEntity.setTipo("cellulare");
+        utenteTest.setContactEntity(new ArrayList<>(Collections.singleton(userContactEntity)));
 
         return utentiRepository.save(utenteTest);
     }

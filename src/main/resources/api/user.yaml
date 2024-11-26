@@ -23,8 +23,6 @@ paths:
                     type: "string"
                   email:
                     type: "string"
-                  cellulare:
-                    type: "string"
                   eta:
                     type: "integer"
       responses:
@@ -39,13 +37,13 @@ paths:
           content: 
             application/json:
               schema:
-                $ref: "#/components/schemas/Utente"
+                $ref: "#/components/schemas/Errore"
         '500':
           description: "" 
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Utente"     
+                $ref: "#/components/schemas/Errore"
     get:
       operationId: "getUtenti"
       parameters: 
@@ -115,7 +113,40 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Errore"
-
+  /utenti/{id}/contatti:
+    post:
+      operationId: "insert contatto per utente"
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: "string"
+          required: true
+      requestBody:
+        description: ""
+        content:
+          application/json:
+                schema:
+                  $ref: "#/components/schemas/UserContact"
+      responses:
+        '201':
+          description: "success"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserContact"
+        '400':
+          description: "bad request"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Errore"
+        '500':
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Errore"
 components:
   schemas:
     Utente:
@@ -128,8 +159,6 @@ components:
         cognome:
           type: "string"
         email:
-          type: "string"
-        cellulare:
           type: "string"
         eta:
           type: "integer"
@@ -146,7 +175,17 @@ components:
           items: 
             $ref: "#/components/schemas/Utente"
         pageNumber:
-          type: "integer"   
+          type: "integer"
+    UserContact:
+      type: "object"
+      properties:
+        id:
+          type: "string"
+        tipo:
+          type: "string"
+        value:
+          type: "string"
+
   securitySchemes:
       bearerAuth: # arbitrary name for the security scheme
         type: http

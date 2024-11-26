@@ -54,13 +54,11 @@ class UtentiControllerTest {
                 nome("Paolo").
                 cognome("verdi").
                 email("mrossi@gmail.com").
-                cellulare("12312345").
                 eta(23).build();
 
         CreaUtenteRequest richiestaNuovoUtenteController= new CreaUtenteRequest();
         richiestaNuovoUtenteController.setNome(richiestaNuovoUtenteService.getNome());
         richiestaNuovoUtenteController.setCognome(richiestaNuovoUtenteService.getCognome());
-        richiestaNuovoUtenteController.setCellulare(richiestaNuovoUtenteService.getCellulare());
         richiestaNuovoUtenteController.setEmail(richiestaNuovoUtenteService.getEmail());
         richiestaNuovoUtenteController.setEta(richiestaNuovoUtenteService.getEta());
 
@@ -68,7 +66,6 @@ class UtentiControllerTest {
         utenteCreato.setId("1231232");
         utenteCreato.setNome(richiestaNuovoUtenteService.getNome());
         utenteCreato.setCognome(richiestaNuovoUtenteService.getCognome());
-        utenteCreato.setCellulare(richiestaNuovoUtenteService.getCellulare());
         utenteCreato.setEmail(richiestaNuovoUtenteService.getEmail());
         utenteCreato.setEta(richiestaNuovoUtenteService.getEta());
 
@@ -106,11 +103,6 @@ class UtentiControllerTest {
                             "mrossi@gmail.com"
                     ))
                     .andExpect(jsonPath(
-                            "$.cellulare"
-                    ).value(
-                            "12312345"
-                    ))
-                    .andExpect(jsonPath(
                                     "$.eta"
                             ).value(
                                     23
@@ -136,7 +128,6 @@ class UtentiControllerTest {
         utenteCancellato.setId(idTest);
         utenteCancellato.setNome("Mario");
         utenteCancellato.setCognome("Rossi");
-        utenteCancellato.setCellulare("12312345");
         utenteCancellato.setEmail("mrossi@gmail.com");
         utenteCancellato.setEta(23);
 
@@ -169,11 +160,6 @@ class UtentiControllerTest {
                             "$.email"
                     ).value(
                             "mrossi@gmail.com"
-                    ))
-                    .andExpect(jsonPath(
-                            "$.cellulare"
-                    ).value(
-                            "12312345"
                     ))
                     .andExpect(jsonPath(
                                     "$.eta"

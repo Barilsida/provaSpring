@@ -37,13 +37,13 @@ public class UtentiControllerIT {
                 nome("Mario").
                 cognome("Rossi").
                 email("mrossi@gmail.com").
-                cellulare("12312345").
+
                 eta(23).build();
 
         CreaUtenteRequest richiestaNuovoUtenteController = new CreaUtenteRequest();
         richiestaNuovoUtenteController.setNome(richiestaNuovoUtenteService.getNome());
         richiestaNuovoUtenteController.setCognome(richiestaNuovoUtenteService.getCognome());
-        richiestaNuovoUtenteController.setCellulare(richiestaNuovoUtenteService.getCellulare());
+
         richiestaNuovoUtenteController.setEmail(richiestaNuovoUtenteService.getEmail());
         richiestaNuovoUtenteController.setEta(richiestaNuovoUtenteService.getEta());
 
@@ -72,11 +72,7 @@ public class UtentiControllerIT {
                 ).value(
                         "mrossi@gmail.com"
                 ))
-                .andExpect(jsonPath(
-                        "$.cellulare"
-                ).value(
-                        "12312345"
-                ))
+
                 .andExpect(jsonPath(
                                 "$.eta"
                         ).value(
@@ -91,13 +87,13 @@ public class UtentiControllerIT {
                 nome("Paolo").
                 cognome("Verdi").
                 email("pverdi@gmail.com").
-                cellulare("12121212").
+
                 eta(34).build();
 
         CreaUtenteRequest richiestaNuovoUtenteController = new CreaUtenteRequest();
         richiestaNuovoUtenteController.setNome(richiestaNuovoUtenteService.getNome());
         richiestaNuovoUtenteController.setCognome(richiestaNuovoUtenteService.getCognome());
-        richiestaNuovoUtenteController.setCellulare(richiestaNuovoUtenteService.getCellulare());
+
         richiestaNuovoUtenteController.setEmail(richiestaNuovoUtenteService.getEmail());
         richiestaNuovoUtenteController.setEta(richiestaNuovoUtenteService.getEta());
 
@@ -118,7 +114,6 @@ public class UtentiControllerIT {
         utenteEntity.setId(creaUtentePerTest().getId());
         utenteEntity.setNome(creaUtentePerTest().getNome());
         utenteEntity.setCognome(creaUtentePerTest().getCognome());
-        utenteEntity.setCellulare(creaUtentePerTest().getCellulare());
         utenteEntity.setEmail(creaUtentePerTest().getEmail());
         utenteEntity.setEta(creaUtentePerTest().getEta());
 
@@ -146,11 +141,6 @@ public class UtentiControllerIT {
                         "$.email"
                 ).value(
                         "pverdi@gmail.com"
-                ))
-                .andExpect(jsonPath(
-                        "$.cellulare"
-                ).value(
-                        "12121212"
                 ))
                 .andExpect(jsonPath(
                                 "$.eta"
@@ -183,7 +173,6 @@ public class UtentiControllerIT {
         utenteEntity.setId(creaUtentePerTest().getId());
         utenteEntity.setNome(creaUtentePerTest().getNome());
         utenteEntity.setCognome(creaUtentePerTest().getCognome());
-        utenteEntity.setCellulare(creaUtentePerTest().getCellulare());
         utenteEntity.setEmail(creaUtentePerTest().getEmail());
         utenteEntity.setEta(creaUtentePerTest().getEta());
 
@@ -211,11 +200,7 @@ public class UtentiControllerIT {
                 ).value(
                         "pverdi@gmail.com"
                 ))
-                .andExpect(jsonPath(
-                        "$.cellulare"
-                ).value(
-                        "12121212"
-                ))
+
                 .andExpect(jsonPath(
                                 "$.eta"
                         ).value(
@@ -270,7 +255,6 @@ public class UtentiControllerIT {
         utenteTest.setNome("Paolo");
         utenteTest.setCognome("Verdi");
         utenteTest.setEmail("pverdi@gmail.com");
-        utenteTest.setCellulare("12121212");
         utenteTest.setEta(34);
 
         return utentiRepository.save(utenteTest);

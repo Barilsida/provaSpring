@@ -1,19 +1,18 @@
 package barisla.example.prova.controllers;
 
 import barisla.example.presentation.api.UtentiApi;
+import barisla.example.presentation.model.*;
 import barisla.example.prova.integrations.model.UtentiDAO;
 import barisla.example.prova.mappers.UtenteMapper;
 import barisla.example.prova.services.UserService;
+import barisla.example.prova.services.models.ContattoUtente;
+import barisla.example.prova.services.models.CreaContattoUtente;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import barisla.example.presentation.model.CreaUtenteRequest;
-import barisla.example.presentation.model.Utente;
-import barisla.example.presentation.model.Utenti;
 
 import java.util.List;
 
@@ -78,6 +77,16 @@ public class UtentiController implements UtentiApi {
         allUtenti.setPageNumber(0);
         return new ResponseEntity<>(allUtenti, HttpStatusCode.valueOf(200));
     }
+
+    @SneakyThrows
+    @Override
+    public ResponseEntity<UserContact> insertContattoPerUtente(String id, UserContact userContact) {
+        CreaContattoUtente creaContattoUtente = utenteMapper.transformContattoRequest(userContact);
+        ContattoUtente contattoUtente = userService.creaContattiUtente(id, creaContattoUtente);
+
+        return new ResponseEntity<>(utenteMapper.transformContattoPresentation(contattoUtente), HttpStatusCode.valueOf(201));
+    }
+
 
 }
 

@@ -30,7 +30,7 @@ class UtenteMapperTest {
 
     @Test
     void transformIgnoreId() {
-        CreaUtente creaUtente = new CreaUtente("Mario","Rossi","1231234","mrossi@gmail.com",43);
+        CreaUtente creaUtente = new CreaUtente("Mario","Rossi","mrossi@gmail.com",43);
         UtenteEntity utenteEntity = utenteMapper.transform(creaUtente);
 
         assertNull(utenteEntity.getId());

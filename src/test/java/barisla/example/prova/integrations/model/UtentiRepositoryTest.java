@@ -18,7 +18,6 @@ class UtentiRepositoryTest {
     @BeforeEach
      void setUp() {
         UtenteEntity utenteEntity = new UtenteEntity();
-        utenteEntity.setCellulare("1111111");
         utenteEntity.setNome("Giacomo");
         utenteEntity.setCognome("Bianchi");
         utenteEntity.setEmail("gbianchi@gmail.com");

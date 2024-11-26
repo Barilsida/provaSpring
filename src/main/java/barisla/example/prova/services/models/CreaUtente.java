@@ -2,6 +2,8 @@ package barisla.example.prova.services.models;
 
 import lombok.*;
 
+import java.util.ArrayList;
+
 @Getter 
 @Setter
 @AllArgsConstructor
@@ -10,7 +12,8 @@ import lombok.*;
 public class CreaUtente {
     private String nome;
     private String cognome;
-    private String cellulare;
     private String email;
     private Integer eta;
+   // private ArrayList<ContattoUtente> contatti;
+
 }
